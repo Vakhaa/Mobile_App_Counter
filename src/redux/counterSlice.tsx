@@ -17,14 +17,14 @@ const counterSlice = createSlice({
   name: 'counter',
   initialState,
   reducers: {
-    increment: (state, action: PayloadAction<number>) => {
-      if((state.value + action.payload) <= 100)
+    changeCounterValue: (state, action: PayloadAction<number>) => {
+      if((state.value + action.payload) <= 100 && (state.value + action.payload) >= 0)
         state.value += action.payload;
     }
   }
 })
 
-export const { increment  } = counterSlice.actions
+export const { changeCounterValue } = counterSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectCount = (state: RootState) => state.counter.value;
