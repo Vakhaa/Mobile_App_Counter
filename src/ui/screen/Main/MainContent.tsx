@@ -1,20 +1,30 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet,  View } from 'react-native';
+import { Spacing } from '../../../styles';
 import Counter from '../../components/Counter';
+import CustomButton from '../../components/CustomButton';
 
 interface Props {
-  value: number
+  value: number,
+  increment: (amount:number) => void,
 }
 
 const MainContent = (props: Props): JSX.Element => {
 
     return <>
     <View style={styles.container}>
+      {/* Counter */}
       <View>
-        <Counter value={props.value} text={"Main:"}/>
+        <Counter value={props.value} text={"Counter:"}/>
       </View>
-      <View>
-        {/* Place for buttons */}
+      {/* Buttons */}
+      <View style={styles.buttons}>
+        <View style={styles.button}>
+          <CustomButton title={"+"} onPress={()=>{props.increment(+1)}} isActive={props.value >=100}/>
+        </View>
+        <View style={[styles.button, {marginLeft: Spacing.m}]}>
+           {/* <Text>-</Text> */}
+        </View>
       </View>
     </View>
     </>
@@ -25,8 +35,17 @@ export default MainContent;
 const styles = StyleSheet.create({
   container:{
     flex:1,
+    justifyContent: 'center',
     alignItems:'center',
-    justifyContent:'center'
+  },
+  buttons:{
+    width:"100%",
+    marginTop: Spacing.m,
+    flexDirection:'row',
+    justifyContent: 'center'
+  },
+  button:{
+    width: "33%"
   }
 });
   
