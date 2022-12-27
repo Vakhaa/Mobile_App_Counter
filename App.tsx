@@ -1,11 +1,11 @@
 
 import React from 'react';
-import { Text } from 'react-native';
+import MainView from './src/ui/screen/MainView';
 
 const App = (): JSX.Element => {
 
   return <>
-  <Text>Main</Text>
+      <MainView />
   </>
 }
 
