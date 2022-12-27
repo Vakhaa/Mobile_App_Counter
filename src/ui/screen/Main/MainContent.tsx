@@ -6,7 +6,7 @@ import CustomButton from '../../components/CustomButton';
 
 interface Props {
   value: number,
-  increment: (amount:number) => void,
+  changeValue: (amount:number) => void,
 }
 
 const MainContent = (props: Props): JSX.Element => {
@@ -20,10 +20,10 @@ const MainContent = (props: Props): JSX.Element => {
       {/* Buttons */}
       <View style={styles.buttons}>
         <View style={styles.button}>
-          <CustomButton title={"+"} onPress={()=>{props.increment(+1)}} isActive={props.value >=100}/>
+          <CustomButton title={"+"} onPress={()=>{props.changeValue(+1)}} isActive={props.value >=100}/>
         </View>
         <View style={[styles.button, {marginLeft: Spacing.m}]}>
-           {/* <Text>-</Text> */}
+          <CustomButton title={"-"} onPress={()=>{props.changeValue(-1)}} isActive={props.value <=0}/>
         </View>
       </View>
     </View>
