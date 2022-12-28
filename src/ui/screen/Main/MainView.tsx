@@ -1,22 +1,42 @@
 import React from 'react'
-import { selectCount, changeCounterValue } from '../../../redux/counterSlice';
+import {
+    selectCount,
+    selectButtonLongPressValue,
+    changeCounterValueAction,
+    changeLongPressValueAction,
+    unpressButtonAction
+} from '../../../redux/counterSlice';
 import { useAppDispatch, useAppSelector } from '../../../redux/redux-hooks';
 import MainContent from './MainContent';
 
-interface Props {}
+interface Props { }
 
 const MainView = (props: Props): JSX.Element => {
 
     let value = useAppSelector(selectCount);
+    let longPressValue = useAppSelector(selectButtonLongPressValue);
+
     let dispatch = useAppDispatch();
 
-    let changeValue = (amount: number) => {
-        dispatch(changeCounterValue(amount));
+    let changeCounterValue = (amount: number) => {
+        dispatch(changeCounterValueAction(amount));
     }
 
-    return <MainContent value={value} changeValue={changeValue}  />
+    let changeLongPressValue = (amount: number) => {
+        dispatch(changeLongPressValueAction(amount));
+    }
+
+    let onPressOut = () => {
+        dispatch(changeCounterValueAction(longPressValue));
+        dispatch(unpressButtonAction());
+    }
+
+    return (<MainContent value={value}
+        longPressValue={longPressValue}
+        changeValue={changeCounterValue}
+        changeLongPressValue={changeLongPressValue}
+        onPressOut={onPressOut} />)
 }
 
 export default MainView;
 
-  
